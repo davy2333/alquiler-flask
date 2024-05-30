@@ -161,7 +161,7 @@ def recibeFoto(file):
        
   
   
-
+#Redireccionando
 @app.errorhandler(404)
 def not_found(error):
     return redirect(url_for('inicio'))

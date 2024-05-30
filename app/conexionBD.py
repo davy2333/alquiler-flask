@@ -2,6 +2,7 @@
 
 import mysql.connector
 
+
 def connectionBD():
     mydb = mysql.connector.connect(
         host ="localhost",
