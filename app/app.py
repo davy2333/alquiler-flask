@@ -149,7 +149,6 @@ def recibeFoto(file):
     filename = secure_filename(file.filename) 
 
     
-    
     extension           = os.path.splitext(filename)[1]
     nuevoNombreFile     = stringAleatorio() + extension
     
