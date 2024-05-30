@@ -81,6 +81,7 @@ def  recibeActualizarCarro(marca, modelo, year, color, puertas, favorito, nuevoN
         return resultado_update
  
 
+ 
 
 def stringAleatorio():
     string_aleatorio = "0123456789abcdefghijklmnopqrstuvwxyz_"
