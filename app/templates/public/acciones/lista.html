@@ -1,6 +1,17 @@
-
-
 {% if (miData) %}
+<div class="container mb-3 ">
+    <div class="row">
+        <div class="col-md-4">
+            <input type="text" id="searchInput" placeholder="Buscar por marca, modelo, año..." class="form-control">
+        </div>
+        <div class="col-md-1">
+            <button onclick="search()" class="btn btn-primary">Buscar</button>
+        </div>
+    </div>
+</div>
+
+
+
 <div class="table-responsive">
     <table class="table table-bordered table-hover">
         <thead>
@@ -13,7 +24,7 @@
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="tableBody">
             {% for carro in miData %}
             {% with urlCarro = '/static/assets/fotos_carros/' %}
             <tr id="Registro_{{ carro.id }}">
@@ -22,14 +33,14 @@
                 <td>{{ carro.modelo }}</td>
                 <td>{{ carro.year }}</td>
                 <td>
-                    {% if(carro.foto !="") %}
+                    {% if carro.foto %}
                     <img src="{{ urlCarro }}{{ carro.foto }}" class="sin_foto_mini" alt="{{ carro.marca }}">
                     {% else %}
                     <img src="{{ urlCarro }}sin_foto.jpg" class="sin_foto_mini" alt="coche">
                     {% endif %}
                 </td>
-                <td width="300">
-                    <span style="display: flex; justify-content:space-between;">
+                <td width="100">
+                    <span style="display: flex; justify-content:space-between, min-width 2px; max-width: 5%;">
                         <a href="{{ url_for('viewDetalleCarro', idCarro = carro.id ) }}" type="button"
                             class="btn btn-warning btn-sm" tooltip="Ver Registro">
                             <i class="bi bi-eye"></i>
@@ -60,3 +71,25 @@
     </div>
 </div>
 {% endif %}
+
+<script>
+    function search() {
+        var input, filter, table, tr, td, i, j, txtValue;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("tableBody");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td");
+            for (j = 0; j < td.length; j++) {
+                txtValue = td[j].textContent || td[j].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                    break;
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+    </script>
